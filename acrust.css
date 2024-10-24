@@ -8,9 +8,9 @@ body {
 }
 
 .ascii {
-    position: fixed; bottom: 0px; padding: 0px; text-align: right; color: #B2BEB5 ; opacity: 0.9;  font-family: Tahoma, Verdana, sans-serif; font-size: 8px; font-weight: normal; -webkit-user-select:none; -webkit-touch-callout:none; -moz-user-select:none; -ms-user-select:none; user-select:none;   
+    position: fixed; bottom: 0px; padding: 0px; text-align: right; color: #B2BEB5 ; opacity: 0.9;  font-family: Tahoma, Verdana, sans-serif; font-size: 8.5px; font-weight: normal; -webkit-user-select:none; -webkit-touch-callout:none; -moz-user-select:none; -ms-user-select:none; user-select:none;   
 }
 
 .right {
-    position: absolute; right: 0px; width: 270px; border: 0px; padding: 40px;
+    position: absolute; right: 0px; width: 260px; border: 0px; padding: 40px;
 }
