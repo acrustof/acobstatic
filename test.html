@@ -312,6 +312,25 @@ body:not(.light-mode) .author-name {
     p {
       margin-bottom: 1.5rem;
     }
+
+@media (max-width: 600px) {
+  body {
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: 0 1rem;
+    font-family: 'Literata', serif; /* example: more readable on mobile */
+    background-size: 100px 100px; /* smaller noise pattern for smaller screens */
+  }
+
+  .content {
+    padding: 0 0.5rem;
+    font-size: 1rem;
+  }
+
+  .container {
+    padding: 5rem 1rem;
+  }
+}    
   </style>
 </head>
 <body>
