@@ -289,10 +289,11 @@ body:not(.light-mode) .author-name {
 
         .social-links {
     display: flex;
+    font-size: 1.5rem;
     flex-direction: column;
     align-items: flex-end; /* Aligns the items to the right */
-    gap: 0.5rem; /* Optional, to add space between links */
-    padding-right: 3rem; /* Add padding to the right side */
+    gap: 0.3rem; /* Optional, to add space between links */
+    padding-right: 2.5rem; /* Add padding to the right side */
     }
 
     .social-links a {
@@ -303,6 +304,26 @@ body:not(.light-mode) .author-name {
     }
 
     .social-links a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+    }
+
+    .archive-posts {
+    display: flex;
+    font-size: 1.15rem;
+    flex-direction: column;
+    gap: 0.3rem; /* Optional, to add space between links */
+    padding-right: 2.5rem; /* Add padding to the right side */
+    }
+
+    .archive-posts a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: opacity 0.3s ease;
+    }
+
+    .archive-posts a:hover {
     opacity: 0.7;
     text-decoration: underline;
     }
@@ -358,12 +379,11 @@ body:not(.light-mode) .author-name {
   </div>
 </p>
 <p><br><br>
-<p><a href=/index.html>A memory of light</a></p>
-<p><a href=/index.html>Visitations</a></p>
-<p><a href=/index.html>Liminalations</a></p>
-<p><a href=/index.html>Ten dollars and no more]
-'
-']</a></p>
+    <div class="archive-posts">
+<a href=/index.html>A memory of light</a><br>
+<a href=/index.html>Visitations</a><br>
+<a href=/index.html>Liminalations</a><br>
+<a href=/index.html>Ten dollars and no more</a><br>
   <br><br><br><br><br><br>
     </div>
   </div>
