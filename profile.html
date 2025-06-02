@@ -286,6 +286,26 @@ body:not(.light-mode) .author-name {
       margin-bottom: 1.5rem;
     }
 
+
+        .social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligns the items to the right */
+    gap: 0.5rem; /* Optional, to add space between links */
+    }
+
+    .social-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: opacity 0.3s ease;
+    }
+
+    .social-links a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+    }
+
 @media (max-width: 600px) {
   body {
     font-size: 1rem;
@@ -331,14 +351,18 @@ body:not(.light-mode) .author-name {
 
 
 <p><br>
-Benedict Mountbatten-Witherspoons<br>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Website
+  <div class="social-links">
+    <a href="https://www.instagram.com" target="_blank">Instagram</a><br>
+    <a href="https://www.yourwebsite.com" target="_blank">Website</a>
+  </div>
 </p>
 <p><br><br>
 <p><a href=/index.html>A memory of light</a></p>
 <p><a href=/index.html>Visitations</a></p>
 <p><a href=/index.html>Liminalations</a></p>
-<p><a href=/index.html>Ten dollars and no more</a></p>
+<p><a href=/index.html>Ten dollars and no more]
+'
+']</a></p>
   <br><br><br><br><br><br>
     </div>
   </div>
