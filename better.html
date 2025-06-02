@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Text Fade – Low Eye Strain</title>
+  <style>
+   
+    :root {
+      --bg-color: #181712 ; 
+      --text-color: #b6b2a9 ;
+      --fade-color: #181712 ;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Crimson Pro', serif;
+      font-weight: 400;
+      font-style: normal;
+      font-feature-settings: "liga" 1, "onum" 1;
+      /* Noise texture */
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABb7uXFAAAAAXNSR0IB2cksfwAAAAlQTFRF////AAAAAAAABJruuAAAAAZ0Uk5T//////8As7+kvwAAADBJREFUeNpjYBgFo2AUjIJRMXAwgk8Fo5iBgZEBMTAQYGFk1wMDQyMDA0P4DQBxhsKj0+pzHAAAAAElFTkSuQmCC");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    
+    body.light-mode {
+      --bg-color: #fefdf9;
+      --text-color: #2e2a24;
+      --fade-color: #fefdf9;
+    }
+
+    .fade-top,
+    .fade-bottom {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .fade-top {
+      top: 0;
+      background: linear-gradient(to bottom, var(--fade-color), transparent);
+    }
+
+    .fade-bottom {
+      bottom: 0;
+      background: linear-gradient(to top, var(--fade-color), transparent);
+    }
+
+    .menu-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-width: 0; 
+      height: 3rem;
+      background-color: var(--bg-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+      z-index: 1000;
+      overflow: visible; /* allow children to breathe */
+      max-width: 100vw;  /* restrict to screen width */
+      
+      border-radius: 0.25rem;
+        box-sizing: border-box;
+    }
+
+    .menu-left {
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      min-width: 0; /* Needed so author name can shrink */
+      flex: 1;
+      
+    }
+
+    #mode-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      margin-right: 0.25rem; /* or more, like 1rem */
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #mode-toggle img {
+      width: 1.5rem;
+      height: 1.5rem;
+      opacity: 0.35;
+      transition: opacity 0.3s ease;
+    }
+
+    #mode-toggle:hover img {
+      opacity: 0.7;
+    }
+
+
+
+    .logo {
+      color: var(--text-color);
+      font-size: 1.15rem;
+      font-weight: 500;
+      text-decoration: none;
+      font-family: 'Crimson Pro', serif;
+      display: inline-block;
+      padding: 0.4rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+    
+    body:not(.light-mode) .logo {
+      opacity: 0.35;
+    }
+
+    body.light-mode .logo {
+      opacity: 0.6;
+    }
+
+    body.light-mode .logo:hover {
+      opacity: 0.6;
+    }
+
+    body:not(.light-mode) .logo:hover {
+      opacity: 0.35;
+    }
+
+
+    .divider {
+      opacity: 0.30;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-color);
+      font-family: 'EB Garamond', serif;
+    }
+    
+    .author-name {
+      color: var(--text-color);
+      font-size: 1.15rem;
+      font-weight: 500;
+      text-decoration: none;
+      font-family: 'EB Garamond', serif;
+      padding: 0.4rem 0.4rem;
+      border-radius: 0.25rem;
+      display: inline-block; /* Makes the whole area clickable */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      min-width: 0;
+
+    }
+
+    .author-name:hover {
+      opacity: 0.85;
+      text-decoration: underline;
+    }
+
+    .author-name,
+    .logo {
+      transition: none !important;
+    }
+
+        
+    body:not(.light-mode) .author-name {
+      opacity: 0.4;
+    }
+
+    body:not(.light-mode) .author-name:hover {
+      opacity: 0.85;
+      text-decoration: underline;
+    }
+
+    body.light-mode .author-name {
+      opacity: 0.7;
+    }
+
+    body.light-mode .author-name:hover {
+      opacity: 0.95;
+      text-decoration: underline;
+    }
+
+    
+/* Light mode only: allow transition */
+body.light-mode .author-name,
+body.light-mode .author-name:hover {
+  transition: opacity 0.5s ease;
+  opacity: 0.8;
+}
+
+/* Dark mode: instant switch, no transition */
+body:not(.light-mode) .author-name {
+  opacity: 0.5;
+}
+
+    body.light-mode .logo {
+      opacity: 0.6;
+    }
+
+    body.light-mode .logo:hover {
+      opacity: 0.6;
+    }
+
+    body.light-mode .author-name {
+      opacity: 0.8;
+    }
+
+    body.light-mode .author-name:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    body.light-mode .logo,
+    body.light-mode .logo:hover,
+    body.light-mode .author-name,
+    body.light-mode .author-name:hover {
+      transition: opacity 0.5s ease;
+    }
+
+    .logo,
+    .logo:hover,
+    .author-name,
+    .author-name:hover {
+      transition: opacity 0.25s ease;
+    }
+
+    body.transitioning-to-light {
+      transition: color 0.6s ease;
+    }
+
+
+
+/* Shift content down so it doesn't hide behind menu bar */
+.container {
+  padding-top: 7rem;
+  padding: 6rem 2rem;
+  
+    }
+
+    .title {
+  font-family: 'EB Garamond', serif;
+  font-weight: 500;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+    .content {
+      width: 100%;
+      max-width: 35rem;
+      margin: auto;
+      line-height: 1.75;
+      letter-spacing: 0.015em;
+      word-spacing: 0.05em;
+      padding: 0 1rem;
+      font-size: 1.15rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+@media (max-width: 600px) {
+  body {
+    font-size: 1rem;
+    letter-spacing: 0.01em; 
+    padding: 0 0rem;
+    font-family: 'Crimson Pro', serif; /* example: more readable on mobile */
+    background-size: 100px 100px; /* smaller noise pattern for smaller screens */
+  }
+
+  .content {
+    padding: 0 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.7rem;
+    max-width: 40ch;
+  }
+
+  .container {
+    padding: 5rem 1rem;
+  }
+
+  #mode-toggle:hover img {
+    opacity: 0.35 !important; /* Match the default, cancel hover */
+  }
+}    
+  </style>
+</head>
+<body>
+
+<div class="menu-bar">
+  <div class="menu-left">
+    <a href="/" class="logo">acru.st</a><span class="divider">|</span>
+    <a href="/profile" class="author-name">Benedict Mountbatten-Witherspoons</a>
+  </div>
+<button id="mode-toggle" aria-label="Toggle light/dark mode">
+  <img id="mode-icon" src="lighton.png" alt="Toggle mode" />
+</button></div>
+
+  <div class="fade-top"></div>
+  <div class="fade-bottom"></div>
+
+  <div class="container">
+    <div class="content">
+
+
+<p><br>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non justo quis lacus euismod egestas ut et quam. Quisque eget luctus arcu. Morbi suscipit ipsum odio, vitae fringilla tellus ornare vitae. Sed leo sem, interdum dignissim ultrices vel, tincidunt eget felis. Integer imperdiet varius mi quis sollicitudin. Ut consequat, sem vel convallis luctus, tellus nisl egestas arcu, sit amet commodo erat lacus a mauris. Donec semper erat non ornare auctor.
+<p></p>
+I wouldn’t want to suggest that Famke’s comments were especially profound or complex, but they seemed to have the effect of shaking us out of our tired existence instead of Famke simply fitting neatly into our lives. When friends usually commented on that Pentlands walk, they seemed to reaffirm our beliefs. It would be too strong, or perhaps not strong enough, to say Famke contradicted them. She definitely subtly tampered with them. 
+<p></p>
+Praesent molestie, velit at lobortis pulvinar, augue est finibus libero, eget laoreet tellus quam at magna. Fusce at euismod mauris. Donec quis nulla eget nisl feugiat cursus. Vestibulum vitae diam mattis, accumsan sem eget, gravida mauris. Integer eleifend, libero id scelerisque accumsan, lectus dui lacinia lorem, in bibendum ipsum ex vel tortor. Etiam tempor, magna ut tincidunt dapibus, ante quam interdum quam, eu bibendum odio nibh sit amet nulla. Proin iaculis neque nibh, sit amet fermentum lectus sodales id. Mauris aliquam nec odio in tempor. Phasellus nec ex maximus, faucibus est non, aliquam urna. Suspendisse posuere tortor id dui iaculis tristique. Pellentesque porta lorem quis tincidunt molestie. In hac habitasse platea dictumst. Sed tincidunt lacinia lacus eu lacinia. Praesent ornare quam vel nisi vehicula luctus.
+<p></p>
+Vivamus non lacus eu felis fringilla tristique. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque consectetur sapien sed sapien accumsan, at sagittis lacus iaculis. Duis eget sapien non dui viverra fermentum. Pellentesque purus leo, laoreet a maximus at, consequat nec dolor. Praesent eu imperdiet libero. Quisque rutrum turpis ac dui commodo, eget consectetur massa mattis. Mauris vehicula sodales lectus, sed euismod dolor blandit in. Nullam rutrum dui sed purus hendrerit vestibulum. Nulla facilisi. Suspendisse nec magna ac quam ultrices viverra eu a sem. Suspendisse fringilla lectus vel congue vulputate. Sed et pharetra neque. Mauris cursus ultrices ornare.
+<p></p>
+affirm Praesent sed eros eleifend, suscipit lorem ut, consectetur metus. Nam suscipit, est interdum cursus molestie, felis leo euismod magna, aliquam auctor nibh metus in eros. Integer ac leo eu dui accumsan vestibulum. In vel leo felis. Donec id vehicula neque, sit amet tempus neque. Sed sit amet suscipit ligula, faucibus vulputate dui. Fusce fringilla nibh non turpis consectetur varius. Praesent dapibus dolor sed sapien porttitor, convallis lacinia ligula sagittis. Duis laoreet lobortis dui sed luctus.
+<p></p>
+Cras aliquam enim ut nibh aliquam, vitae interdum ante scelerisque. Praesent at nunc justo. Praesent nisl lorem, elementum in finibus varius, bibendum lacinia nibh. Mauris tristique metus in odio tristique hendrerit et quis magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean facilisis, tortor a finibus commodo, dui nisi ullamcorper urna, ac vehicula urna orci in odio. In eget elit turpis. Phasellus ultrices sed leo eu facilisis. Proin aliquam nulla elit, nec tempor quam feugiat non. In euismod efficitur viverra. Praesent lobortis lacus eget lobortis cursus.
+<p></p>
+Phasellus sodales eros nulla. Sed fermentum, velit id fringilla lobortis, est orci aliquet turpis, vitae egestas arcu quam eget tortor. Nullam et interdum nisi. Nunc ornare in leo nec euismod. Nullam eget felis nec augue tincidunt blandit. Proin viverra lobortis ultrices. Integer ornare dignissim sapien, quis lobortis elit cursus id. Maecenas commodo ornare felis vitae tempus.
+<p></p>
+Proin placerat, quam non lacinia vestibulum, ligula leo euismod lacus, id rhoncus elit lacus vitae enim. Mauris scelerisque eget elit ut sollicitudin. Cras non odio eget tortor suscipit bibendum a quis nulla. Pellentesque finibus ultrices purus, lobortis luctus ligula. Pellentesque eleifend interdum nibh et sodales. Nullam bibendum nisl mi, eu consequat orci ultricies ut. Duis quis sem sit amet metus tempor finibus sit amet non nisi.
+<p></p>
+Sed ultrices nunc lectus, non rutrum nulla consectetur id. In quis imperdiet enim. Nullam rhoncus tellus blandit justo blandit, eu ultricies erat rhoncus. Pellentesque eu est felis. In hac habitasse platea dictumst. Integer non orci nec erat efficitur dignissim. Sed efficitur, risus commodo euismod egestas, leo mi ullamcorper neque, ac porttitor nulla lectus et diam. Ut malesuada, ligula at mattis interdum, lorem justo fringilla sapien, non euismod neque urna ut dui. Suspendisse eget sodales magna. Sed ut eros eu leo molestie vulputate. Nullam bibendum est eget ligula volutpat commodo. Etiam vitae cursus felis.
+<p></p>
+Quisque bibendum orci id lobortis laoreet. Praesent egestas, tellus et imperdiet iaculis, ipsum sapien mattis neque, sed auctor orci metus nec libero. Vestibulum vitae maximus orci. Pellentesque eros urna, tincidunt a pulvinar vel, posuere id massa. Pellentesque a elit imperdiet, venenatis massa non, varius augue. Sed rhoncus lacinia ante id commodo. Suspendisse lacinia lacus sit amet tortor imperdiet, sit amet lacinia felis fermentum. In consequat magna sit amet blandit ultrices. Aliquam lacus sem, pellentesque viverra mauris sit amet, hendrerit gravida turpis.
+<p></p>
+Sed tincidunt, sapien eu placerat vehicula, risus justo accumsan tellus, vel pretium urna risus eget nulla. Mauris luctus pretium ligula ut dictum. Vestibulum vitae feugiat ipsum. Pellentesque imperdiet lacinia tortor vel dapibus. Aliquam velit nunc, lacinia nec pretium non, rhoncus fermentum magna. Nulla facilisi. Aenean nec ante lorem. Donec quis efficitur tortor, eu commodo leo. Proin sed augue vel libero cursus auctor ut vitae libero. Nulla tincidunt massa eu mollis semper. Maecenas consequat eleifend justo, sed mattis eros lobortis vel. Aliquam volutpat nisi ante, non ultricies sem pretium a. Ut lacinia sapien pellentesque velit varius, eget ultrices elit volutpat.
+<p></p>
+Sed vel mauris quam. Vestibulum porta nec orci a tempus. Duis sit amet nunc eget dolor ultricies semper. Vestibulum volutpat, urna non lobortis tristique, tellus urna sodales erat, ac pharetra urna nisl non quam. Maecenas sit amet mauris lorem. Proin id rutrum nibh, vitae fermentum nulla. Sed purus lacus, posuere sit amet sapien in, volutpat congue lorem. Aliquam erat volutpat. Cras tincidunt tempor nisl et pharetra. Ut eget sapien rhoncus tellus scelerisque hendrerit et non sapien. Quisque ullamcorper, ipsum ut faucibus ultricies, neque turpis pellentesque ligula, eget blandit magna massa tristique leo.
+<p></p>
+Nam aliquet commodo tellus, vitae commodo massa mollis in. Donec sapien odio, finibus at volutpat sed, laoreet vel mi. Praesent tempus risus vel est pretium, ut pharetra nulla placerat. Vestibulum efficitur, dolor in semper vulputate, urna sapien auctor odio, eu congue nisi metus sed erat. Vestibulum at diam a diam sagittis viverra ut mollis mauris. In non risus quis mauris imperdiet rhoncus. Pellentesque vehicula maximus arcu eu aliquet. Donec et maximus eros. Fusce placerat felis sit amet molestie eleifend. Donec posuere sit amet metus quis mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum bibendum quam sed turpis consectetur, et interdum lacus hendrerit. Nullam sit amet viverra enim. Pellentesque eget aliquet diam. Suspendisse faucibus ligula ullamcorper, tincidunt sem aliquam, finibus velit. Etiam eu nulla leo.
+<p></p>
+Pellentesque lobortis nisi nec magna condimentum euismod. Suspendisse gravida interdum maximus. Vivamus sit amet efficitur tellus. Maecenas felis felis, lobortis vel aliquam id, ullamcorper sed felis. Sed sed lorem aliquet, dignissim nulla vel, porttitor enim. Etiam et accumsan eros. Sed vehicula tincidunt turpis eu iaculis. Nam fermentum ac orci eget lacinia. Fusce eget massa in diam eleifend pellentesque. Integer placerat finibus libero et commodo. Curabitur enim libero, consequat vel libero ut, ultrices sagittis ligula. Curabitur semper, nulla tempus sollicitudin tempus, mi nunc ultrices tortor, non cursus sem quam ac ipsum. Morbi et purus et leo semper malesuada ac ac leo. Aenean in ante nec ipsum laoreet vestibulum ac sit amet ligula. Quisque ut ornare neque, vitae gravida ipsum. 
+</p>    <br><br><br><br><br><br>
+    </div>
+  </div>
+
+<script>
+  const toggle = document.getElementById('mode-toggle');
+  const icon = document.getElementById('mode-icon');
+  const body = document.body;
+
+  const updateIcon = (isLight) => {
+    icon.src = isLight ? 'lightoff.png' : 'lighton.png';
+  };
+
+  // On page load, apply theme and icon
+  if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-mode');
+    updateIcon(true);
+  } else {
+    updateIcon(false);
+  }
+
+  toggle.addEventListener('click', () => {
+    const switchingToLight = !body.classList.contains('light-mode');
+
+    if (switchingToLight) {
+      body.classList.add('transitioning-to-light');
+      setTimeout(() => {
+        body.classList.remove('transitioning-to-light');
+      }, 600); // Match your CSS transition duration
+    }
+
+    body.classList.toggle('light-mode');
+    const isLight = body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    updateIcon(isLight);
+  });
+</script>
+
+ 
+</body>
+</html>
