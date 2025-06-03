@@ -331,13 +331,12 @@ body.light-mode .author-name:hover {
     <div class="content">
 
 
-    </div><!-- Remove this button inside container -->
-<!-- <button id="next-chapter">Next Chapter →</button> -->
+    </div>
 
 <!-- Place this at the end of body, before </body> -->
 
 <script>
-  // Theme toggle code
+  // Theme toggle code (same as before, no change)
   const toggle = document.getElementById('mode-toggle');
   const icon = document.getElementById('mode-icon');
   const body = document.body;
@@ -367,15 +366,14 @@ body.light-mode .author-name:hover {
     updateIcon(isLight);
   });
 
-  // Chapter navigation code
-  const chapters = [
-    `<p>Chapter 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur.</p>`,
-    `<p>Chapter 2: Vestibulum convallis quam et nisi commodo, in condimentum metus semper.</p>`,
-    `<p>Chapter 3: Curabitur auctor nulla id diam aliquam, nec lobortis enim aliquam.</p>`
+  // Chapter file paths (you can update paths/names here)
+  const chapterFiles = [
+    'chapter1.html',
+    'chapter2.html',
+    'chapter3.html'
   ];
 
   let currentChapterIndex = 0;
-
   const contentDiv = document.querySelector('.content');
 
   // Create navigation buttons container
@@ -394,26 +392,37 @@ body.light-mode .author-name:hover {
 
   navContainer.appendChild(prevBtn);
   navContainer.appendChild(nextBtn);
-
   contentDiv.parentNode.insertBefore(navContainer, contentDiv.nextSibling);
 
   function updateButtons() {
     prevBtn.disabled = currentChapterIndex === 0;
-    nextBtn.disabled = currentChapterIndex === chapters.length - 1;
+    nextBtn.disabled = currentChapterIndex === chapterFiles.length - 1;
   }
 
-  function loadChapter(index) {
-    if (index < 0 || index >= chapters.length) return;
+  async function loadChapter(index) {
+    if (index < 0 || index >= chapterFiles.length) return;
 
     currentChapterIndex = index;
-
     contentDiv.style.opacity = 0;
-    setTimeout(() => {
-      contentDiv.innerHTML = chapters[currentChapterIndex];
+
+    try {
+      const response = await fetch(chapterFiles[currentChapterIndex]);
+      if (!response.ok) {
+        throw new Error(`Could not load ${chapterFiles[currentChapterIndex]}`);
+      }
+      const html = await response.text();
+
+      setTimeout(() => {
+        contentDiv.innerHTML = html;
+        contentDiv.style.opacity = 1;
+        window.scrollTo(0, 0);
+        updateButtons();
+      }, 300);
+    } catch (error) {
+      contentDiv.innerHTML = `<p style="color: red;">Error loading chapter: ${error.message}</p>`;
       contentDiv.style.opacity = 1;
-      window.scrollTo(0, 0);
       updateButtons();
-    }, 300);
+    }
   }
 
   prevBtn.addEventListener('click', () => {
@@ -423,11 +432,12 @@ body.light-mode .author-name:hover {
   });
 
   nextBtn.addEventListener('click', () => {
-    if (currentChapterIndex < chapters.length - 1) {
+    if (currentChapterIndex < chapterFiles.length - 1) {
       loadChapter(currentChapterIndex + 1);
     }
   });
 
+  // Load the first chapter on page load
   loadChapter(0);
 </script>
 
