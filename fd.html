@@ -318,25 +318,31 @@ body.light-mode .author-name:hover {
 <div class="menu-bar">
   <div class="menu-left">
     <a href="/" class="logo">acru.st</a><span class="divider">|</span>
-    <a href="/profile" class="author-name">Fyoder Dostoevsky</a>
+    <a href="/profile" class="author-name">Dracula</a>
   </div>
-<button id="mode-toggle" aria-label="Toggle light/dark mode">
-  <img id="mode-icon" src="lighton.png" alt="Toggle mode" />
-</button></div>
+  <button id="mode-toggle" aria-label="Toggle light/dark mode"><img id="mode-icon" src="lighton.png" alt="Toggle mode" /></button>
+</div>
 
   <div class="fade-top"></div>
   <div class="fade-bottom"></div>
 
-  <div class="container">
-    <div class="content">
+<div class="container">
+  <div class="content">
 
 
-    </div>
+  </div>
+
+  <div id="nav-container" style="text-align:center; margin-top: 2rem;">
+    <a href="#" id="prev-btn" class="nav-link disabled">Previous Chapter</a>
+    <a href="#" id="next-btn" class="nav-link">Next Chapter</a>
+  </div>
+</div>
+
 
 <!-- Place this at the end of body, before </body> -->
 
 <script>
-  // Theme toggle code (same as before, no change)
+  // Dark mode
   const toggle = document.getElementById('mode-toggle');
   const icon = document.getElementById('mode-icon');
   const body = document.body;
@@ -366,80 +372,82 @@ body.light-mode .author-name:hover {
     updateIcon(isLight);
   });
 
-  // Chapter file paths (you can update paths/names here)
-  const chapterFiles = [
+  // Chapter navigation
+  const contentDiv = document.querySelector('.content');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  // List your chapter HTML filenames here
+  const chapters = [
     'chapter1.html',
     'chapter2.html',
     'chapter3.html'
   ];
 
   let currentChapterIndex = 0;
-  const contentDiv = document.querySelector('.content');
 
-  // Create navigation buttons container
-  const navContainer = document.createElement('div');
-  navContainer.style.textAlign = 'center';
-  navContainer.style.marginTop = '2rem';
-
-  const prevBtn = document.createElement('button');
-  prevBtn.id = 'prev-btn';
-  prevBtn.textContent = 'Previous Chapter';
-  prevBtn.disabled = true;
-
-  const nextBtn = document.createElement('button');
-  nextBtn.id = 'next-btn';
-  nextBtn.textContent = 'Next Chapter';
-
-  navContainer.appendChild(prevBtn);
-  navContainer.appendChild(nextBtn);
-  contentDiv.parentNode.insertBefore(navContainer, contentDiv.nextSibling);
-
-  function updateButtons() {
-    prevBtn.disabled = currentChapterIndex === 0;
-    nextBtn.disabled = currentChapterIndex === chapterFiles.length - 1;
-  }
-
+  // Load chapter content from external HTML file
   async function loadChapter(index) {
-    if (index < 0 || index >= chapterFiles.length) return;
+    if (index < 0 || index >= chapters.length) return;
 
     currentChapterIndex = index;
-    contentDiv.style.opacity = 0;
 
     try {
-      const response = await fetch(chapterFiles[currentChapterIndex]);
-      if (!response.ok) {
-        throw new Error(`Could not load ${chapterFiles[currentChapterIndex]}`);
-      }
-      const html = await response.text();
-
-      setTimeout(() => {
-        contentDiv.innerHTML = html;
-        contentDiv.style.opacity = 1;
-        window.scrollTo(0, 0);
-        updateButtons();
-      }, 300);
-    } catch (error) {
-      contentDiv.innerHTML = `<p style="color: red;">Error loading chapter: ${error.message}</p>`;
+      contentDiv.style.opacity = 0;
+      const response = await fetch(chapters[index]);
+      if (!response.ok) throw new Error('Failed to load chapter');
+      const text = await response.text();
+      contentDiv.innerHTML = text;
       contentDiv.style.opacity = 1;
+      window.scrollTo(0, 0);
       updateButtons();
+    } catch (error) {
+      contentDiv.innerHTML = `<p>Error loading chapter.</p>`;
+      console.error(error);
     }
   }
 
-  prevBtn.addEventListener('click', () => {
+  // Enable/disable prev/next links
+  function updateButtons() {
+    if (currentChapterIndex === 0) {
+      prevBtn.classList.add('disabled');
+      prevBtn.setAttribute('aria-disabled', 'true');
+      prevBtn.href = '#';
+    } else {
+      prevBtn.classList.remove('disabled');
+      prevBtn.removeAttribute('aria-disabled');
+      prevBtn.href = '#';
+    }
+
+    if (currentChapterIndex === chapters.length - 1) {
+      nextBtn.classList.add('disabled');
+      nextBtn.setAttribute('aria-disabled', 'true');
+      nextBtn.href = '#';
+    } else {
+      nextBtn.classList.remove('disabled');
+      nextBtn.removeAttribute('aria-disabled');
+      nextBtn.href = '#';
+    }
+  }
+
+  prevBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     if (currentChapterIndex > 0) {
       loadChapter(currentChapterIndex - 1);
     }
   });
 
-  nextBtn.addEventListener('click', () => {
-    if (currentChapterIndex < chapterFiles.length - 1) {
+  nextBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentChapterIndex < chapters.length - 1) {
       loadChapter(currentChapterIndex + 1);
     }
   });
 
-  // Load the first chapter on page load
+  // Initial load
   loadChapter(0);
 </script>
+
 
 
  
