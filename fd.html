@@ -350,7 +350,7 @@ body.light-mode .author-name:hover {
         contentDiv.style.opacity = 0;
         setTimeout(() => {
           contentDiv.innerHTML = html;
-          contentDiv.style.opacity = 1;
+          contentDiv.style.opacity = 1;  window.scrollTo(0, 0);  // Scroll to top after content loads
         }, 300);
 
       } catch (error) {
