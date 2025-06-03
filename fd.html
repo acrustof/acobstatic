@@ -331,55 +331,13 @@ body.light-mode .author-name:hover {
     <div class="content">
 
 
-    </div>
+    </div><!-- Remove this button inside container -->
+<!-- <button id="next-chapter">Next Chapter →</button> -->
 
-<button id="next-chapter">Next Chapter →</button>
-
-  <script>
-    const nextBtn = document.getElementById('next-chapter');
-    const contentDiv = document.querySelector('.content');
-    let currentChapter = 1;
-
-    async function loadChapter(chapterNumber) {
-      try {
-        const response = await fetch(`chapter${chapterNumber}.html`);
-        if (!response.ok) throw new Error('Chapter not found');
-        const html = await response.text();
-
-        // Fade out
-        contentDiv.style.opacity = 0;
-        setTimeout(() => {
-          contentDiv.innerHTML = html;
-          contentDiv.style.opacity = 1;  window.scrollTo(0, 0);  // Scroll to top after content loads
-        }, 300);
-
-      } catch (error) {
-        alert('No more chapters or error loading chapter.');
-        // Optionally disable button after last chapter
-        nextBtn.disabled = true;
-      }
-    }
-
-    nextBtn.addEventListener('click', () => {
-      currentChapter++;
-      loadChapter(currentChapter);
-    });
-
-    // Load the first chapter on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      loadChapter(currentChapter);
-    });
-  </script>
-</nr>
-
-<br><br><br>
-    </div>
-  </div>
-
-
-  
+<!-- Place this at the end of body, before </body> -->
 
 <script>
+  // Theme toggle code
   const toggle = document.getElementById('mode-toggle');
   const icon = document.getElementById('mode-icon');
   const body = document.body;
@@ -388,7 +346,6 @@ body.light-mode .author-name:hover {
     icon.src = isLight ? 'lightoff.png' : 'lighton.png';
   };
 
-  // On page load, apply theme and icon
   if (localStorage.getItem('theme') === 'light') {
     body.classList.add('light-mode');
     updateIcon(true);
@@ -398,20 +355,82 @@ body.light-mode .author-name:hover {
 
   toggle.addEventListener('click', () => {
     const switchingToLight = !body.classList.contains('light-mode');
-
     if (switchingToLight) {
       body.classList.add('transitioning-to-light');
       setTimeout(() => {
         body.classList.remove('transitioning-to-light');
-      }, 600); // Match your CSS transition duration
+      }, 600);
     }
-
     body.classList.toggle('light-mode');
     const isLight = body.classList.contains('light-mode');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     updateIcon(isLight);
   });
+
+  // Chapter navigation code
+  const chapters = [
+    `<p>Chapter 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur.</p>`,
+    `<p>Chapter 2: Vestibulum convallis quam et nisi commodo, in condimentum metus semper.</p>`,
+    `<p>Chapter 3: Curabitur auctor nulla id diam aliquam, nec lobortis enim aliquam.</p>`
+  ];
+
+  let currentChapterIndex = 0;
+
+  const contentDiv = document.querySelector('.content');
+
+  // Create navigation buttons container
+  const navContainer = document.createElement('div');
+  navContainer.style.textAlign = 'center';
+  navContainer.style.marginTop = '2rem';
+
+  const prevBtn = document.createElement('button');
+  prevBtn.id = 'prev-btn';
+  prevBtn.textContent = 'Previous Chapter';
+  prevBtn.disabled = true;
+
+  const nextBtn = document.createElement('button');
+  nextBtn.id = 'next-btn';
+  nextBtn.textContent = 'Next Chapter';
+
+  navContainer.appendChild(prevBtn);
+  navContainer.appendChild(nextBtn);
+
+  contentDiv.parentNode.insertBefore(navContainer, contentDiv.nextSibling);
+
+  function updateButtons() {
+    prevBtn.disabled = currentChapterIndex === 0;
+    nextBtn.disabled = currentChapterIndex === chapters.length - 1;
+  }
+
+  function loadChapter(index) {
+    if (index < 0 || index >= chapters.length) return;
+
+    currentChapterIndex = index;
+
+    contentDiv.style.opacity = 0;
+    setTimeout(() => {
+      contentDiv.innerHTML = chapters[currentChapterIndex];
+      contentDiv.style.opacity = 1;
+      window.scrollTo(0, 0);
+      updateButtons();
+    }, 300);
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentChapterIndex > 0) {
+      loadChapter(currentChapterIndex - 1);
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentChapterIndex < chapters.length - 1) {
+      loadChapter(currentChapterIndex + 1);
+    }
+  });
+
+  loadChapter(0);
 </script>
+
 
  
 </body>
