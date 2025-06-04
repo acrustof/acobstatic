@@ -3,16 +3,13 @@
 <head>
 
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Text Fade – Low Eye Strain</title>
@@ -362,6 +359,8 @@ body.light-mode .author-name:hover {
 </head>
 <body>
 
+<!-- Menu bar and fade -->    
+
 <div class="menu-bar">
   <div class="menu-left">
     <a href="/" class="logo">acru.st</a><span class="divider">|</span>
@@ -373,6 +372,8 @@ body.light-mode .author-name:hover {
   <div class="fade-top"></div>
   <div class="fade-bottom"></div>
 
+<!-- Body -->
+
 <div class="container">
 
   <div class="nav-container" style="text-align:center">
@@ -381,19 +382,23 @@ body.light-mode .author-name:hover {
   </div>
 
   <div class="content">
-
-
   </div>
 
   <div class="nav-container" style="text-align:center; margin-top: 2rem;">
     <a href="#" class="nav-link prev-btn disabled" aria-label="Previous chapter">«</a>
     <a href="#" class="nav-link next-btn" aria-label="Next chapter">»</a>
   </div>
+
 </div>
 
 
 
+
 <!-- CHAPTER 1 -->
+
+
+
+
 <template id="chapter-1">
 <article>
 <h2 class="chapter-number">I</h2>
@@ -418,7 +423,7 @@ body.light-mode .author-name:hover {
 </p><p>
         “My Friend.⁠—Welcome to the Carpathians. I am anxiously expecting you. Sleep well tonight. At three tomorrow the diligence will start for Bukovina; a place on it is kept for you. At the Borgo Pass my carriage will await you and will bring you to me. I trust that your journey from London has been a happy one, and that you will enjoy your stay in my beautiful land.
 </p><p>
-        “Your friend,
+        “Your friend,<br>
         “Dracula.”
 </p><p>
     4 May.⁠—I found that my landlord had got a letter from the Count, directing him to secure the best place on the coach for me; but on making inquiries as to details he seemed somewhat reticent, and pretended that he could not understand my German. This could not be true, because up to then he had understood it perfectly; at least, he answered my questions exactly as if he did. He and his wife, the old lady who had received me, looked at each other in a frightened sort of way. He mumbled out that the money had been sent in a letter, and that was all he knew. When I asked him if he knew Count Dracula, and could tell me anything of his castle, both he and his wife crossed themselves, and, saying that they knew nothing at all, simply refused to speak further. It was so near the time of starting that I had no time to ask anyone else, for it was all very mysterious and not by any means comforting.
@@ -481,7 +486,11 @@ body.light-mode .author-name:hover {
 </template>
 
 
+
+
 <!-- CHAPTER 2 -->
+
+
 
 
 <template id="chapter-2">
@@ -611,12 +620,19 @@ body.light-mode .author-name:hover {
 </template>
 
 
+
 <!-- CHAPTER 3 -->
 
 
-<!-- Place this at the end of body, before </body> -->
+
+
+<!-- JS -->
+
+
+
+
 <script>
-  // 🌙 Dark Mode Toggle
+  // Dark Mode
   const toggle = document.getElementById('mode-toggle');
   const icon = document.getElementById('mode-icon');
   const body = document.body;
@@ -646,11 +662,11 @@ body.light-mode .author-name:hover {
     updateIcon(isLight);
   });
 
-  // 📖 Chapter Navigation (in-page templates)
+  // Chapter Navigation
   const contentDiv = document.querySelector('.content');
   const prevBtns = document.querySelectorAll('.prev-btn');
   const nextBtns = document.querySelectorAll('.next-btn');
-  const totalChapters = 27; // Update this to match your actual chapter count
+  const totalChapters = 27; // Update this to match actual chapter count
 
   let currentChapterIndex = 0;
 
@@ -703,8 +719,9 @@ body.light-mode .author-name:hover {
     });
   });
 
-  // 🚀 Load initial chapter
+  // Load initial chapter
   loadChapter(0);
+
 </script>
 
 
