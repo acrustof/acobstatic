@@ -272,20 +272,43 @@ body.light-mode .author-name:hover {
         text-align: center;
         font-size: 2rem;
         font-weight: bold;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.25rem;   
+        font-variant: small-caps;
     }
 
     .chapter-title {
         text-align: center;
-        font-size: 1.5rem;
-        font-weight: 600;
-        font-style: italic;
+        font-size: 1.4rem;
+        font-weight: 500;
         margin-bottom: 1rem;
+        font-variant: small-caps;
+  
     }
 
     p {
         margin-bottom: 1.5rem;
     }
+
+    .scene-break {
+      border: none;
+      text-align: center;
+      margin: 2em 0;
+    }
+
+    .scene-break::before {
+      content: "* * *";
+      letter-spacing: 0.5em;
+      color: #777;
+      font-size: 1.2em;
+    }
+
+    blockquote {
+      margin: 1.5em 2em;
+      text-indent: 0;
+      font-style: normal;
+      font-family: inherit;
+    }
+
 
 /* Chapter navigation */
 
@@ -342,6 +365,7 @@ body.light-mode .author-name:hover {
   font-size: 1.25rem;
   opacity: 0.75;
   transition: opacity 0.3s ease;
+  font-variant: small-caps;
 }
 
 .toc-list a:hover {
