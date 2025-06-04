@@ -358,9 +358,9 @@ body.light-mode .author-name:hover {
 
 <div class="container">
 
-  <div id="nav-container" style="text-align:center; margin-top: 2rem;">
-    <a href="#" id="prev-btn" class="nav-link disabled" aria-label="Previous chapter">«</a>
-    <a href="#" id="next-btn" class="nav-link" aria-label="Next chapter">»</a>
+  <div class="nav-container" style="text-align:center; margin-top: 2rem;">
+    <a href="#" class="nav-link prev-btn disabled" aria-label="Previous chapter">«</a>
+    <a href="#" class="nav-link next-btn" aria-label="Next chapter">»</a>
   </div>
 
   <div class="content">
@@ -368,9 +368,9 @@ body.light-mode .author-name:hover {
 
   </div>
 
-  <div id="nav-container" style="text-align:center; margin-top: 2rem;">
-    <a href="#" id="prev-btn" class="nav-link disabled">«</a>
-    <a href="#" id="next-btn" class="nav-link">»</a>
+  <div class="nav-container" style="text-align:center; margin-top: 2rem;">
+    <a href="#" class="nav-link prev-btn disabled" aria-label="Previous chapter">«</a>
+    <a href="#" class="nav-link next-btn" aria-label="Next chapter">»</a>
   </div>
 </div>
 
@@ -409,79 +409,78 @@ body.light-mode .author-name:hover {
   });
 
   // Chapter navigation
-  const contentDiv = document.querySelector('.content');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
+const contentDiv = document.querySelector('.content');
+const prevBtns = document.querySelectorAll('.prev-btn');
+const nextBtns = document.querySelectorAll('.next-btn');
 
-  // List your chapter HTML filenames here
-  const chapters = [
-    'chapter1.html',
-    'chapter2.html',
-    'chapter3.html'
-  ];
+let currentChapterIndex = 0;
 
-  let currentChapterIndex = 0;
+async function loadChapter(index) {
+  if (index < 0 || index >= chapters.length) return;
+  currentChapterIndex = index;
 
-  // Load chapter content from external HTML file
-  async function loadChapter(index) {
-    if (index < 0 || index >= chapters.length) return;
-
-    currentChapterIndex = index;
-
-    try {
-      contentDiv.style.opacity = 0;
-      const response = await fetch(chapters[index]);
-      if (!response.ok) throw new Error('Failed to load chapter');
-      const text = await response.text();
-      contentDiv.innerHTML = text;
-      contentDiv.style.opacity = 1;
-      window.scrollTo(0, 0);
-      updateButtons();
-    } catch (error) {
-      contentDiv.innerHTML = `<p>Error loading chapter.</p>`;
-      console.error(error);
-    }
+  try {
+    contentDiv.style.opacity = 0;
+    const response = await fetch(chapters[index]);
+    if (!response.ok) throw new Error('Failed to load chapter');
+    const text = await response.text();
+    contentDiv.innerHTML = text;
+    contentDiv.style.opacity = 1;
+    window.scrollTo(0, 0);
+    updateButtons();
+  } catch (error) {
+    contentDiv.innerHTML = `<p>Error loading chapter.</p>`;
+    console.error(error);
   }
+}
 
-  // Enable/disable prev/next links
-  function updateButtons() {
+function updateButtons() {
+  prevBtns.forEach(btn => {
     if (currentChapterIndex === 0) {
-      prevBtn.classList.add('disabled');
-      prevBtn.setAttribute('aria-disabled', 'true');
-      prevBtn.href = '#';
+      btn.classList.add('disabled');
+      btn.setAttribute('aria-disabled', 'true');
+      btn.href = '#';
     } else {
-      prevBtn.classList.remove('disabled');
-      prevBtn.removeAttribute('aria-disabled');
-      prevBtn.href = '#';
+      btn.classList.remove('disabled');
+      btn.removeAttribute('aria-disabled');
+      btn.href = '#';
     }
+  });
 
+  nextBtns.forEach(btn => {
     if (currentChapterIndex === chapters.length - 1) {
-      nextBtn.classList.add('disabled');
-      nextBtn.setAttribute('aria-disabled', 'true');
-      nextBtn.href = '#';
+      btn.classList.add('disabled');
+      btn.setAttribute('aria-disabled', 'true');
+      btn.href = '#';
     } else {
-      nextBtn.classList.remove('disabled');
-      nextBtn.removeAttribute('aria-disabled');
-      nextBtn.href = '#';
+      btn.classList.remove('disabled');
+      btn.removeAttribute('aria-disabled');
+      btn.href = '#';
     }
-  }
+  });
+}
 
-  prevBtn.addEventListener('click', (e) => {
+prevBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
     e.preventDefault();
     if (currentChapterIndex > 0) {
       loadChapter(currentChapterIndex - 1);
     }
   });
+});
 
-  nextBtn.addEventListener('click', (e) => {
+nextBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
     e.preventDefault();
     if (currentChapterIndex < chapters.length - 1) {
       loadChapter(currentChapterIndex + 1);
     }
   });
+});
 
-  // Initial load
-  loadChapter(0);
+// Initial load
+loadChapter(0);
+
 </script>
 
 
