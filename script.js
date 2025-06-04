@@ -34,6 +34,25 @@
   const nextBtns = document.querySelectorAll('.next-btn');
   const totalChapters = 27; // Update this to match actual chapter count
 
+  // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                  // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                          // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                  // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                    // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
   let currentChapterIndex = 0;
 
 function loadChapter(index) {
@@ -115,3 +134,31 @@ document.addEventListener('click', function (e) {
     loadChapter(targetChapter);
   }
 });
+
+
+// TOC loading
+const tocLink = document.getElementById('load-toc');
+const tocTemplate = document.getElementById('toc-template');
+
+if (tocLink && tocTemplate) {
+  tocLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    contentDiv.style.transition = 'opacity 1s ease';
+    contentDiv.style.opacity = 0;
+
+    setTimeout(() => {
+      contentDiv.innerHTML = tocTemplate.innerHTML;
+      window.scrollTo(0, 0);
+
+      // Trigger reflow
+      void contentDiv.offsetWidth;
+
+      contentDiv.style.transition = 'opacity 1s ease';
+      contentDiv.style.opacity = 1;
+
+      currentChapterIndex = -1; // so next/prev buttons don’t interfere
+      updateButtons();
+    }, 1100);
+  });
+}

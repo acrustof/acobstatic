@@ -351,14 +351,7 @@ body.light-mode .author-name:hover {
 
 
 
-/* toc */
-/* toc */
-/* toc */
-/* toc */
-/* toc */
-/* toc */
-/* toc */
-/* toc */
+/* TOC links, could delete */
 
 .toc-inline {
   margin-top: 3rem;
@@ -382,6 +375,33 @@ body.light-mode .author-name:hover {
 }
 
 .toc-inline a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+
+/* tos experiment */
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.toc-list li {
+  margin: 1rem 0;
+}
+
+.toc-list a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.25rem;
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+.toc-list a:hover {
   opacity: 1;
   text-decoration: underline;
 }
