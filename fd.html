@@ -376,7 +376,6 @@ body.light-mode .author-name:hover {
 
 
 <!-- Place this at the end of body, before </body> -->
-
 <script>
   // Dark mode
   const toggle = document.getElementById('mode-toggle');
@@ -408,79 +407,85 @@ body.light-mode .author-name:hover {
     updateIcon(isLight);
   });
 
+  // ✅ This was missing!
+  const chapters = [
+    'chapter1.html',
+    'chapter2.html',
+    'chapter3.html'
+  ];
+
   // Chapter navigation
-const contentDiv = document.querySelector('.content');
-const prevBtns = document.querySelectorAll('.prev-btn');
-const nextBtns = document.querySelectorAll('.next-btn');
+  const contentDiv = document.querySelector('.content');
+  const prevBtns = document.querySelectorAll('.prev-btn');
+  const nextBtns = document.querySelectorAll('.next-btn');
 
-let currentChapterIndex = 0;
+  let currentChapterIndex = 0;
 
-async function loadChapter(index) {
-  if (index < 0 || index >= chapters.length) return;
-  currentChapterIndex = index;
+  async function loadChapter(index) {
+    if (index < 0 || index >= chapters.length) return;
+    currentChapterIndex = index;
 
-  try {
-    contentDiv.style.opacity = 0;
-    const response = await fetch(chapters[index]);
-    if (!response.ok) throw new Error('Failed to load chapter');
-    const text = await response.text();
-    contentDiv.innerHTML = text;
-    contentDiv.style.opacity = 1;
-    window.scrollTo(0, 0);
-    updateButtons();
-  } catch (error) {
-    contentDiv.innerHTML = `<p>Error loading chapter.</p>`;
-    console.error(error);
-  }
-}
-
-function updateButtons() {
-  prevBtns.forEach(btn => {
-    if (currentChapterIndex === 0) {
-      btn.classList.add('disabled');
-      btn.setAttribute('aria-disabled', 'true');
-      btn.href = '#';
-    } else {
-      btn.classList.remove('disabled');
-      btn.removeAttribute('aria-disabled');
-      btn.href = '#';
+    try {
+      contentDiv.style.opacity = 0;
+      const response = await fetch(chapters[index]);
+      if (!response.ok) throw new Error('Failed to load chapter');
+      const text = await response.text();
+      contentDiv.innerHTML = text;
+      contentDiv.style.opacity = 1;
+      window.scrollTo(0, 0);
+      updateButtons();
+    } catch (error) {
+      contentDiv.innerHTML = `<p>Error loading chapter.</p>`;
+      console.error(error);
     }
+  }
+
+  function updateButtons() {
+    prevBtns.forEach(btn => {
+      if (currentChapterIndex === 0) {
+        btn.classList.add('disabled');
+        btn.setAttribute('aria-disabled', 'true');
+        btn.href = '#';
+      } else {
+        btn.classList.remove('disabled');
+        btn.removeAttribute('aria-disabled');
+        btn.href = '#';
+      }
+    });
+
+    nextBtns.forEach(btn => {
+      if (currentChapterIndex === chapters.length - 1) {
+        btn.classList.add('disabled');
+        btn.setAttribute('aria-disabled', 'true');
+        btn.href = '#';
+      } else {
+        btn.classList.remove('disabled');
+        btn.removeAttribute('aria-disabled');
+        btn.href = '#';
+      }
+    });
+  }
+
+  prevBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentChapterIndex > 0) {
+        loadChapter(currentChapterIndex - 1);
+      }
+    });
   });
 
   nextBtns.forEach(btn => {
-    if (currentChapterIndex === chapters.length - 1) {
-      btn.classList.add('disabled');
-      btn.setAttribute('aria-disabled', 'true');
-      btn.href = '#';
-    } else {
-      btn.classList.remove('disabled');
-      btn.removeAttribute('aria-disabled');
-      btn.href = '#';
-    }
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentChapterIndex < chapters.length - 1) {
+        loadChapter(currentChapterIndex + 1);
+      }
+    });
   });
-}
 
-prevBtns.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (currentChapterIndex > 0) {
-      loadChapter(currentChapterIndex - 1);
-    }
-  });
-});
-
-nextBtns.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (currentChapterIndex < chapters.length - 1) {
-      loadChapter(currentChapterIndex + 1);
-    }
-  });
-});
-
-// Initial load
-loadChapter(0);
-
+  // Initial load
+  loadChapter(0);
 </script>
 
 
