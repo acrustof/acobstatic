@@ -116,6 +116,7 @@ function loadChapter(index) {
   });
 // Load initial chapter immediately, without waiting for fade
 const template = document.getElementById('chapter-1');
+const content = document.querySelector('#content'); // a real div on the page
 if (template) {
   contentDiv.innerHTML = template.innerHTML;
   document.body.classList.add('loaded'); // for any initial transition effect
