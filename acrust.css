@@ -24,3 +24,17 @@
 .paren {
   color: blue;
 }
+
+@media (max-width: 600px) {
+  .ascii {
+    font-size: 0.7rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    opacity: 0.8;
+    padding: 0.5rem;
+  }
+
+  .ascii pre {
+    line-height: 1;
+  }
+}
