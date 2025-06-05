@@ -35,7 +35,7 @@ body {
 
 @media (max-width: 840px) {
   body {
-    background: #222;
+    background: #111;
   }
   .ascii {
     padding: 0 0.5rem;
