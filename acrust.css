@@ -35,12 +35,12 @@ body {
 
 @media (max-width: 840px) {
   body {
-    background: #111;
+    background: #222;
   }
   .ascii {
     padding: 0 0.5rem;
     font-size: 9px;
-    color: #ffffe0;
+    color: #0057B7;
   }
   .paren {
     color: #ffffe0;
