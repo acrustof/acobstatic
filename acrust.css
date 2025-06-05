@@ -39,9 +39,8 @@ body {
   background: #111;
   }
   .ascii {
-    padding: 0 1rem;
-    font-size: 8.5px;
-    background: #111;
+    padding: 0 0.5rem;
+    font-size: 9px;
     color: #ffffe0;
   }
   .paren {
