@@ -24,19 +24,27 @@ body {
 }
 
 .paren {
-  color: #0000FF;
+  color: #0000ff;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #000;
-    color: #fff;
+    background: #111;
+    color: #ffffe0;
   } 
 }
 
-@media (max-width: 500px) {
+@media (max-width: 840px) {
+  body {
+  background: #111;
+  }
   .ascii {
-    padding: 0;
+    padding: 0 1rem;
     font-size: 8.5px;
+    background: #111;
+    color: #ffffe0;
+  }
+  .paren {
+    color: #ffffe0;
   }
 }
