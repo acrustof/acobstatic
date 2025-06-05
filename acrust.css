@@ -23,7 +23,7 @@ body {
 }
 
 .paren {
-  color: #0000ff;
+  color: #0057B7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,7 +40,7 @@ body {
   .ascii {
     padding: 0 0.5rem;
     font-size: 9px;
-    color: #0057B7;
+    color: #0000ff;
   }
   .paren {
     color: #ffffe0;
