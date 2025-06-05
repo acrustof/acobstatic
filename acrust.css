@@ -7,7 +7,6 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  opacity: 0.9;
   font-family: Tahoma, Verdana, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
@@ -31,7 +30,7 @@ body {
   body {
     background: #111;
     color: #ffffe0;
-  } 
+  }
 }
 
 @media (max-width: 840px) {
@@ -39,7 +38,7 @@ body {
   background: #111;
   }
   .ascii {
-    padding: 0.5rem;
+    padding: 0 0.5rem;
     font-size: 9px;
     color: #ffffe0;
   }
