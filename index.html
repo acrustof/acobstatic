@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>acrustofbread</title>
-    <link rel="stylesheet" href="acrust.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>acrustofbread</title>
+  <link rel="stylesheet" href="acrust.css">
 </head>
 <body>
-    <header>
-    <h1 class="ascii" aria-label="a crust of bread">
-<pre aria-hidden="true"><code>                        _/_       /)   /)               /) 
+  <h1 class="ascii" aria-label="a crust of bread">
+<pre><code>
+                        _/_       /)   /)               /) 
   __,    _, _   , , (   /     ___//   (/_ __   _  _,  _(/  
  (_/(_  (__/ (_(_/_/_)_(__   (_)/(_  /_) / (__(/_(_(_(_(_  
                                /)                          
                               (/                           
 </code></pre>
-    </h1>
-    </div>
-    </header>
+  </h1>
 
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const codeBlock = document.querySelector(".ascii code");
-  codeBlock.innerHTML = codeBlock.textContent.replace(
-    /([()])/g,
-    '<span class="paren">$1</span>'
-  );
-});
-</script>
-
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const codeBlock = document.querySelector(".ascii code");
+      codeBlock.innerHTML = codeBlock.textContent.replace(
+        /([()])/g,
+        '<span class="paren">$1</span>'
+      );
+    });
+  </script>
 </body>
 </html>
