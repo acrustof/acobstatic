@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>acrustofbread</title>
+  <link rel="stylesheet" href="acrust.css">
+</head>
+<body>
+  <h1 class="ascii" aria-label="a crust of bread">
+<pre><code>
+ _____     __     __    __     __     __         __  __     __         __     ______  
+/\  __-.  /\ \   /\ "-./  \   /\ \   /\ \       /\ \_\ \   /\ \       /\ \   /\__  _\ 
+\ \ \/\ \ \ \ \  \ \ \-./\ \  \ \ \  \ \ \____  \ \____ \  \ \ \____  \ \ \  \/_/\ \/ 
+ \ \____-  \ \_\  \ \_\ \ \_\  \ \_\  \ \_____\  \/\_____\  \ \_____\  \ \_\    \ \_\ 
+  \/____/   \/_/   \/_/  \/_/   \/_/   \/_____/   \/_____/   \/_____/   \/_/     \/_/ 
+                                                                                      
+</code></pre>
+  </h1>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const codeBlock = document.querySelector(".ascii code");
+      codeBlock.innerHTML = codeBlock.textContent.replace(
+        /([()])/g,
+        '<span class="paren">$1</span>'
+      );
+    });
+  </script>
+</body>
+</html>
