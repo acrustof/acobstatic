@@ -1,0 +1,48 @@
+body {
+  background: #fff;
+  color: #000033;
+}
+
+.ascii {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: right;
+  line-height: 1.1;
+  padding: 0 1rem;
+  user-select: none;
+  pointer-events: none;
+}
+
+.ascii code {
+  white-space: pre; /* preserve ASCII formatting */
+  display: block;
+}
+
+.paren {
+  color: #0000ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #111;
+    color: #ffffe0;
+  }
+}
+
+@media (max-width: 840px) {
+  body {
+    background: #111;
+  }
+  .ascii {
+    padding: 0 0.5rem;
+    font-size: 6px;
+    color: #ffffe0;
+  }
+  .paren {
+    color: #ffffe0;
+  }
+}
