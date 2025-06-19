@@ -382,7 +382,7 @@ body.light-mode .author-name:hover {
 
 @media (max-width: 600px) {
   body {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     letter-spacing: 0.01em; 
     padding: 0 0rem;
     font-family: 'Crimson Pro', serif; /* example: more readable on mobile */
@@ -391,7 +391,7 @@ body.light-mode .author-name:hover {
 
   .content {
     padding: 0rem;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     line-height: 1.7rem;
     max-width: 40ch;
     transition: opacity 0.3s ease;
