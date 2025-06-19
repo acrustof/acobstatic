@@ -32,7 +32,7 @@
   const contentDiv = document.querySelector('.content');
   const prevBtns = document.querySelectorAll('.prev-btn');
   const nextBtns = document.querySelectorAll('.next-btn');
-  const totalChapters = 27; // Update this to match actual chapter count
+  const totalChapters = 35; // Update this to match actual chapter count
 
   // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
     // CHANGE HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -58,7 +58,7 @@
 function loadChapter(index) {
   if (index < 0 || index >= totalChapters) return;
 
-  const template = document.getElementById(`chapter-${index + 1}`);
+  const template = document.getElementById(`chapter-${index}`);
   if (!template) {
     contentDiv.innerHTML = `<p>Chapter not found.</p>`;
     return;
@@ -117,7 +117,7 @@ function loadChapter(index) {
     });
   });
 // Load initial chapter immediately, without waiting for fade
-const template = document.getElementById('chapter-1');
+const template = document.getElementById('chapter-0');
 if (template) {
   contentDiv.innerHTML = template.innerHTML;
   document.body.classList.add('loaded'); // for any initial transition effect
