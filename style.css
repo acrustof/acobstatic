@@ -115,7 +115,7 @@
     }
     
     body:not(.light-mode) .logo {
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
     body.light-mode .logo {
@@ -144,7 +144,7 @@
       font-size: 1.15rem;
       font-weight: 500;
       text-decoration: none;
-      font-family: 'EB Garamond', serif;
+      font-family: 'Crimson Pro', serif;
       padding: 0.4rem 0.4rem;
       border-radius: 0.25rem;
       display: inline-block; /* Makes the whole area clickable */
@@ -272,20 +272,48 @@ body.light-mode .author-name:hover {
         text-align: center;
         font-size: 2rem;
         font-weight: bold;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.25rem;   
+        font-variant: small-caps;
     }
 
     .chapter-title {
         text-align: center;
-        font-size: 1.5rem;
-        font-weight: 600;
-        font-style: italic;
+        font-size: 1.4rem;
+        font-weight: 500;
         margin-bottom: 1rem;
+        font-variant: small-caps;
+  
     }
 
     p {
+        /* text-indent: 1.5em;    TURNS ON PARAGRAPH INDENTS */
         margin-bottom: 1.5rem;
     }
+
+    .no-indent {
+        text-indent: 0;
+    }
+
+    .scene-break {
+      border: none;
+      text-align: center;
+      margin: 2em 0;
+    }
+
+    .scene-break::before {
+      content: "* * *";
+      letter-spacing: 0.5em;
+      color: #777;
+      font-size: 1.2em;
+    }
+
+    blockquote {
+      margin: 1.5em 2em;
+      text-indent: 0;
+      font-style: normal;
+      font-family: inherit;
+    }
+
 
 /* Chapter navigation */
 
@@ -342,6 +370,7 @@ body.light-mode .author-name:hover {
   font-size: 1.25rem;
   opacity: 0.75;
   transition: opacity 0.3s ease;
+  font-variant: small-caps;
 }
 
 .toc-list a:hover {
@@ -353,7 +382,7 @@ body.light-mode .author-name:hover {
 
 @media (max-width: 600px) {
   body {
-    font-size: 1rem;
+    font-size: 1.125rem;
     letter-spacing: 0.01em; 
     padding: 0 0rem;
     font-family: 'Crimson Pro', serif; /* example: more readable on mobile */
